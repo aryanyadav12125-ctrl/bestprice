@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BestPrice</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Baloo 2',cursive;background:#f7f7f7;max-width:480px;margin:0 auto;min-height:100vh}
+.header{background:#F8C51B;padding:12px 16px;position:sticky;top:0;z-index:100;box-shadow:0 3px 12px rgba(248,197,27,0.5)}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.logo{font-size:1.5rem;font-weight:900;color:#1C1C1C}
+.logo span{color:#1C1C1C;opacity:0.5}
+.logo small{display:block;font-size:0.5rem;font-weight:800;letter-spacing:2px;color:#1C1C1C;opacity:0.6;margin-top:-4px}
+.loc{background:rgba(0,0,0,0.12);border-radius:20px;padding:5px 12px;font-size:0.72rem;font-weight:700;color:#1C1C1C}
+.search-row{display:flex;gap:8px}
+.search-row input{flex:1;border:none;outline:none;background:white;border-radius:10px;padding:10px 14px;font-size:0.9rem;font-family:'Baloo 2',cursive;color:#1C1C1C;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.search-row button{background:#1C1C1C;color:#F8C51B;border:none;border-radius:10px;padding:0 16px;font-size:1rem;cursor:pointer;font-weight:800}
+.hero{background:linear-gradient(135deg,#1C1C1C,#2D2D2D);padding:24px 16px 32px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:250px;height:250px;background:radial-gradient(circle,rgba(248,197,27,0.18) 0%,transparent 70%);top:-60px;left:-40px;border-radius:50%}
+.hero h1{font-size:1.75rem;font-weight:900;color:white;line-height:1.2;margin-bottom:6px;position:relative;z-index:1}
+.hero h1 span{color:#F8C51B}
+.hero p{color:rgba(255,255,255,0.6);font-size:0.82rem;margin-bottom:18px;position:relative;z-index:1}
+.quick-tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;position:relative;z-index:1}
+.qtag{background:rgba(248,197,27,0.15);color:#F8C51B;border:1px solid rgba(248,197,27,0.35);padding:5px 13px;border-radius:20px;font-size:0.75rem;cursor:pointer;font-family:'Baloo 2',cursive;font-weight:700}
+.qtag:active{background:#F8C51B;color:#1C1C1C}
+.section{padding:14px 14px}
+.sec-title{font-size:0.75rem;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.cat-scroll{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;margin-bottom:14px}
+.cat-scroll::-webkit-scrollbar{display:none}
+.cat{flex-shrink:0;background:white;border-radius:12px;padding:9px 13px;text-align:center;cursor:pointer;border:2px solid transparent;box-shadow:0 1px 6px rgba(0,0,0,0.07);transition:all 0.2s}
+.cat:active{transform:scale(0.94)}
+.cat.active{border-color:#F8C51B;background:#FFFBEB}
+.cat .ce{font-size:1.4rem}
+.cat .cn{font-size:0.6rem;font-weight:800;color:#1C1C1C;margin-top:2px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.pcard{background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);cursor:pointer;transition:transform 0.15s;position:relative}
+.pcard:active{transform:scale(0.97)}
+.pimg{background:#FFFDF0;height:105px;display:flex;align-items:center;justify-content:center;position:relative}
+.pemoji{font-size:3rem}
+.cbadge{position:absolute;bottom:7px;right:7px;background:#1C1C1C;color:#F8C51B;font-size:0.58rem;font-weight:900;padding:3px 7px;border-radius:5px}
+.wbadge{position:absolute;top:7px;right:7px;background:white;border:1px solid #eee;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;box-shadow:0 1px 4px rgba(0,0,0,0.1);cursor:pointer}
+.wbadge.wishlisted{background:#F8C51B;border-color:#F8C51B}
+.pinfo{padding:9px 9px 11px}
+.pbrand{font-size:0.6rem;color:#888;margin-bottom:1px}
+.pname{font-size:0.78rem;font-weight:800;color:#1C1C1C;line-height:1.2;margin-bottom:7px}
+.prow{display:flex;align-items:center;justify-content:space-between;padding:4px 6px;border-radius:7px;margin-bottom:3px;background:#f8f8f8}
+.prow.cheap{background:#FFFBEB}
+.plogo{font-size:0.52rem;font-weight:900;color:white;padding:2px 5px;border-radius:3px;white-space:nowrap}
+.psz{font-size:0.58rem;color:#888;margin-left:4px}
+.ppr{font-size:0.85rem;font-weight:900;color:#1C1C1C}
+.ppr.best{color:#2E7D32}
+.ppr.orig{font-size:0.58rem;text-decoration:line-through;color:#aaa;font-weight:600}
+.ptm{font-size:0.55rem;color:#aaa}
+.spill{background:#F8C51B;color:#1C1C1C;font-size:0.58rem;font-weight:900;padding:2px 7px;border-radius:8px;margin-top:5px;display:inline-block}
+.loading{display:none;text-align:center;padding:40px;grid-column:1/-1}
+.spin{width:34px;height:34px;border:3px solid #eee;border-top-color:#F8C51B;border-radius:50%;animation:sp 0.6s linear infinite;margin:0 auto 10px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:white;border-top:1px solid #eee;display:flex;padding:8px 0 14px;z-index:100;box-shadow:0 -3px 15px rgba(0,0,0,0.08)}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+.ni .ic{font-size:1.2rem}
+.ni .lb{font-size:0.58rem;font-weight:700;color:#aaa}
+.page{display:none}
+.page.active{display:block}
+.pb80{padding-bottom:80px}
+.wl-empty{text-align:center;padding:60px 20px;color:#aaa}
+.wl-empty .big{font-size:3rem;margin-bottom:10px}
+.wl-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;align-items:flex-end;justify-content:center}
+.overlay.open{display:flex}
+.modal{background:white;border-radius:22px 22px 0 0;padding:14px 14px 30px;width:100%;max-width:480px;animation:su 0.28s ease;max-height:90vh;overflow-y:auto}
+@keyframes su{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.mhandle{width:38px;height:4px;background:#eee;border-radius:4px;margin:0 auto 14px}
+.mhead{display:flex;align-items:center;gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f5f5f5}
+.memi{font-size:2.6rem}
+.mbn{font-size:0.68rem;color:#888}
+.mnm{font-size:0.92rem;font-weight:900;color:#1C1C1C;line-height:1.2}
+.msave{background:linear-gradient(135deg,#F8C51B,#e0af10);border-radius:11px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.msave .ml{font-size:0.76rem;color:#1C1C1C;font-weight:700}
+.msave .ma{font-size:1.2rem;font-weight:900;color:#1C1C1C}
+.mrow{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-radius:11px;margin-bottom:7px;background:#f8f8f8;border:2px solid transparent}
+.mrow.best{border-color:#F8C51B;background:#FFFBEB}
+.mrl{display:flex;align-items:center;gap:9px}
+.mlg{font-size:0.62rem;font-weight:900;color:white;padding:3px 9px;border-radius:5px;white-space:nowrap}
+.mplnm{font-size:0.82rem;font-weight:800;color:#1C1C1C}
+.mptm{font-size:0.65rem;color:#888}
+.mrr{text-align:right}
+.morig{font-size:0.65rem;text-decoration:line-through;color:#aaa}
+.mpr{font-size:1.05rem;font-weight:900;color:#1C1C1C}
+.mpr.best{color:#2E7D32}
+.obtn{display:block;width:100%;margin-top:5px;padding:7px;background:#F8C51B;color:#1C1C1C;border:none;border-radius:7px;font-size:0.72rem;font-weight:900;cursor:pointer;font-family:'Baloo 2',cursive}
+.closebtn{display:block;width:100%;margin-top:10px;padding:12px;background:#f5f5f5;color:#1C1C1C;border:none;border-radius:11px;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:'Baloo 2',cursive}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1C1C1C;color:#F8C51B;padding:9px 20px;border-radius:20px;font-size:0.8rem;font-weight:800;z-index:400;opacity:0;transition:opacity 0.3s;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1}
+
+/* ===== BRAND FILTER ===== */
+.brand-scroll{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:16px}
+.brand-scroll::-webkit-scrollbar{display:none}
+.brand-chip{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+.brand-chip:active{transform:scale(0.92)}
+.brand-logo-box{width:54px;height:54px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.3rem;border:3px solid transparent;transition:all 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.brand-chip.active .brand-logo-box{border-color:#1C1C1C;transform:scale(1.08)}
+.brand-nm{font-size:0.6rem;font-weight:800;color:#888}
+.brand-chip.active .brand-nm{color:#1C1C1C}
+
+/* ===== COUPON CARD ===== */
+.coupon-card{background:white;border-radius:16px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.07);border:1.5px solid #f0f0f0;transition:all 0.2s}
+.coupon-card.revealed-card{border-color:#F8C51B}
+.ctop{padding:14px 14px 10px;display:flex;align-items:flex-start;gap:12px}
+.c-brand-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.c-info{flex:1}
+.c-discount{font-size:1.05rem;font-weight:900;color:#1C1C1C}
+.c-desc{font-size:0.72rem;color:#555;margin-top:2px;line-height:1.3}
+.c-exp{font-size:0.6rem;color:#aaa;margin-top:3px}
+.c-exp.expiring{color:#e53935;font-weight:700}
+.c-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.ctag{font-size:0.58rem;font-weight:800;padding:2px 7px;border-radius:5px}
+.ctag.hot{background:#fff3e0;color:#e65100}
+.ctag.new{background:#e3f2fd;color:#1565c0}
+.ctag.normal{background:#f3e5f5;color:#6a1b9a}
+
+/* COUPON BOTTOM */
+.cbottom{border-top:1.5px dashed #eee;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#FAFAFA}
+
+/* CODE STATES */
+.code-hidden{background:#f0f0f0;border:1.5px dashed #ddd;border-radius:8px;padding:6px 12px;font-size:0.8rem;font-weight:900;color:#aaa;letter-spacing:2px;min-width:90px;text-align:center}
+.code-revealed{background:#FFFBEB;border:1.5px dashed #F8C51B;border-radius:8px;padding:6px 12px;font-size:0.85rem;font-weight:900;color:#1C1C1C;letter-spacing:1.5px;min-width:90px;text-align:center;cursor:pointer}
+.code-unavail{background:#ffeaea;border:1.5px dashed #ffcdd2;border-radius:8px;padding:6px 10px;font-size:0.65rem;font-weight:800;color:#c62828;min-width:90px;text-align:center}
+
+/* BUTTONS */
+.get-new-btn{background:#1C1C1C;color:#F8C51B;border:none;border-radius:10px;padding:8px 14px;font-size:0.72rem;font-weight:900;cursor:pointer;font-family:'Baloo 2',cursive;transition:all 0.2s;white-space:nowrap}
+.get-new-btn:active{background:#333}
+.get-new-btn:disabled{background:#ccc;color:#888;cursor:not-allowed}
+.copy-small-btn{background:#F8C51B;color:#1C1C1C;border:none;border-radius:10px;padding:8px 12px;font-size:0.72rem;font-weight:900;cursor:pointer;font-family:'Baloo 2',cursive;white-space:nowrap}
+.unavail-btn{background:#f5f5f5;color:#aaa;border:none;border-radius:10px;padding:8px 12px;font-size:0.68rem;font-weight:800;cursor:not-allowed;white-space:nowrap}
+
+/* NEW COUPON BANNER */
+.new-coupon-banner{background:linear-gradient(135deg,#1C1C1C,#2D2D2D);border-radius:14px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.2s;border:2px solid #F8C51B}
+.new-coupon-banner:active{transform:scale(0.98)}
+.ncb-icon{font-size:2rem}
+.ncb-text{flex:1}
+.ncb-title{font-size:0.9rem;font-weight:900;color:white}
+.ncb-sub{font-size:0.7rem;color:rgba(255,255,255,0.6);margin-top:2px}
+.ncb-btn{background:#F8C51B;color:#1C1C1C;border:none;border-radius:8px;padding:7px 13px;font-size:0.72rem;font-weight:900;cursor:pointer;font-family:'Baloo 2',cursive;white-space:nowrap}
+
+/* ===== AD OVERLAY ===== */
+.ad-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:300;align-items:center;justify-content:center;padding:16px}
+.ad-ov.open{display:flex}
+.ad-box{background:white;border-radius:20px;width:100%;max-width:380px;overflow:hidden;animation:pop 0.3s ease}
+@keyframes pop{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+.ad-hdr{background:#1C1C1C;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.ad-hdr-txt{color:#F8C51B;font-size:0.72rem;font-weight:800}
+.ad-x{background:rgba(255,255,255,0.15);border:none;color:white;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:0.9rem;font-family:'Baloo 2',cursive;display:flex;align-items:center;justify-content:center}
+.ad-body{padding:20px;text-align:center}
+
+/* AD LOADING STATE */
+.ad-loading .ad-emoji-big{font-size:2.8rem;margin-bottom:10px}
+.ad-loading .ad-title{font-size:0.95rem;font-weight:900;color:#1C1C1C;margin-bottom:6px}
+.ad-loading .ad-sub{font-size:0.76rem;color:#888;margin-bottom:16px}
+.fake-ad{background:#f8f8f8;border-radius:12px;padding:14px;margin-bottom:14px;text-align:left;border:1px solid #eee}
+.fake-ad-label{font-size:0.6rem;color:#bbb;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.fake-ad-content{display:flex;align-items:center;gap:10px}
+.fake-ad-img{width:48px;height:48px;background:linear-gradient(135deg,#F8C51B,#e0af10);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.fake-ad-text .fat1{font-size:0.8rem;font-weight:800;color:#1C1C1C}
+.fake-ad-text .fat2{font-size:0.68rem;color:#888;margin-top:2px}
+.fake-ad-text .fat3{font-size:0.65rem;color:#F8C51B;font-weight:700;margin-top:3px}
+.progress-wrap{margin-top:12px}
+.progress-bar{height:6px;background:#eee;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#F8C51B,#e0af10);border-radius:3px;transition:width 0.1s linear}
+.timer-txt{font-size:0.72rem;color:#888;margin-top:8px;text-align:center}
+.timer-txt span{color:#1C1C1C;font-weight:900;font-size:0.9rem}
+.unlock-btn{display:block;width:100%;padding:13px;background:#ccc;color:#888;border:none;border-radius:12px;font-size:0.88rem;font-weight:900;cursor:not-allowed;font-family:'Baloo 2',cursive;margin-top:12px;transition:all 0.3s}
+.unlock-btn.ready{background:#F8C51B;color:#1C1C1C;cursor:pointer}
+
+/* AD SUCCESS STATE */
+.ad-success .success-icon{font-size:3rem;margin-bottom:8px}
+.ad-success .success-title{font-size:1rem;font-weight:900;color:#2E7D32;margin-bottom:14px}
+.big-code-box{background:#FFFBEB;border:2px dashed #F8C51B;border-radius:14px;padding:18px;margin-bottom:12px}
+.big-code-label{font-size:0.68rem;color:#888;margin-bottom:6px}
+.big-code{font-size:1.8rem;font-weight:900;color:#1C1C1C;letter-spacing:3px}
+.big-code-save{font-size:0.75rem;color:#2E7D32;font-weight:700;margin-top:4px}
+.copy-big-btn{display:block;width:100%;padding:12px;background:#1C1C1C;color:#F8C51B;border:none;border-radius:12px;font-size:0.88rem;font-weight:900;cursor:pointer;font-family:'Baloo 2',cursive;margin-bottom:8px}
+.close-big-btn{display:block;width:100%;padding:11px;background:#f5f5f5;color:#1C1C1C;border:none;border-radius:12px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:'Baloo 2',cursive}
+
+/* AD FAIL STATE */
+.ad-fail .fail-icon{font-size:3rem;margin-bottom:8px}
+.ad-fail .fail-title{font-size:0.95rem;font-weight:900;color:#c62828;margin-bottom:6px}
+.ad-fail .fail-sub{font-size:0.78rem;color:#888;margin-bottom:16px;line-height:1.4}
+.notify-btn-big{display:block;width:100%;padding:12px;background:#1C1C1C;color:#F8C51B;border:none;border-radius:12px;font-size:0.85rem;font-weight:900;cursor:pointer;font-family:'Baloo 2',cursive;margin-bottom:8px}
+.close-fail-btn{display:block;width:100%;padding:11px;background:#f5f5f5;color:#1C1C1C;border:none;border-radius:12px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:'Baloo 2',cursive}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo">Best<span>Price</span><small>SASTA DHUNDO • SMART BANO</small></div>
+    <div class="loc">📍 Delhi NCR</div>
+  </div>
+  <div class="search-row">
+    <input type="text" id="searchInput" placeholder="🔍  Ice cream, Atta, Pepsi..."/>
+    <button onclick="doSearch()">🔍</button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="page active pb80" id="pageHome">
+  <div class="hero">
+    <h1>Ek Search,<br><span>Sab Ka Price!</span></h1>
+    <p>Blinkit • Zepto • Swiggy • BigBasket</p>
+    <div class="quick-tags">
+      <span class="qtag" onclick="searchItem('ice cream')">🍦 Ice Cream</span>
+      <span class="qtag" onclick="searchItem('pepsi')">🥤 Pepsi</span>
+      <span class="qtag" onclick="searchItem('atta')">🌾 Atta</span>
+      <span class="qtag" onclick="searchItem('maggi')">🍜 Maggi</span>
+      <span class="qtag" onclick="searchItem('milk')">🥛 Milk</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="sec-title">📦 Categories</div>
+    <div class="cat-scroll">
+      <div class="cat active" onclick="loadCat('all',this)"><div class="ce">🛒</div><div class="cn">Sab</div></div>
+      <div class="cat" onclick="loadCat('icecream',this)"><div class="ce">🍦</div><div class="cn">Ice Cream</div></div>
+      <div class="cat" onclick="loadCat('drinks',this)"><div class="ce">🥤</div><div class="cn">Drinks</div></div>
+      <div class="cat" onclick="loadCat('snacks',this)"><div class="ce">🍟</div><div class="cn">Snacks</div></div>
+      <div class="cat" onclick="loadCat('dairy',this)"><div class="ce">🥛</div><div class="cn">Dairy</div></div>
+      <div class="cat" onclick="loadCat('atta',this)"><div class="ce">🌾</div><div class="cn">Atta</div></div>
+      <div class="cat" onclick="loadCat('noodles',this)"><div class="ce">🍜</div><div class="cn">Noodles</div></div>
+    </div>
+    <div class="sec-title">🔥 Best Deals</div>
+    <div class="pgrid" id="productGrid">
+      <div class="loading" style="display:block;grid-column:1/-1"><div class="spin"></div><p style="font-size:0.82rem;color:#aaa">Price compare ho raha hai... 🔍</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="page pb80" id="pageSearch">
+  <div style="padding:16px">
+    <div class="sec-title">🔍 Search Results</div>
+    <div class="pgrid" id="searchGrid"></div>
+  </div>
+</div>
+
+<!-- COUPONS -->
+<div class="page pb80" id="pageCoupons">
+  <div style="background:linear-gradient(135deg,#1C1C1C,#2D2D2D);padding:20px 16px 24px;text-align:center">
+    <div style="font-size:1.6rem;font-weight:900;color:white;margin-bottom:4px">🏷️ Coupon <span style="color:#F8C51B">Codes</span></div>
+    <div style="font-size:0.8rem;color:rgba(255,255,255,0.6)">"Get New Coupon" tap karo — ad dekhne ke baad code milega!</div>
+  </div>
+  <div class="section">
+    <div class="sec-title">🏪 Brand Chunno</div>
+    <div class="brand-scroll" id="brandScroll"></div>
+
+    <!-- NEW COUPON BANNER -->
+    <div class="new-coupon-banner" id="newCouponBanner" onclick="tryGetNewCoupon()">
+      <div class="ncb-icon">🎰</div>
+      <div class="ncb-text">
+        <div class="ncb-title">Get New Coupon!</div>
+        <div class="ncb-sub" id="newCouponSub">Ad dekhne ke baad naya code milega</div>
+      </div>
+      <button class="ncb-btn">Try Karo →</button>
+    </div>
+
+    <div class="sec-title">🎟️ Aapke Coupons</div>
+    <div id="couponList"></div>
+  </div>
+</div>
+
+<!-- WISHLIST -->
+<div class="page pb80" id="pageWishlist">
+  <div style="padding:16px">
+    <div class="sec-title">❤️ Meri Wishlist</div>
+    <div id="wishlistContent"></div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="page pb80" id="pageProfile">
+  <div style="padding:16px">
+    <div style="background:#F8C51B;border-radius:16px;padding:20px;text-align:center;margin-bottom:14px">
+      <div style="font-size:3rem">👤</div>
+      <div style="font-size:1rem;font-weight:900;color:#1C1C1C;margin-top:6px">Mera Account</div>
+      <div style="font-size:0.75rem;color:rgba(0,0,0,0.6)">Delhi NCR</div>
+    </div>
+    <div style="background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+      <div style="padding:14px 16px;border-bottom:1px solid #f5f5f5;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="showPage('pageWishlist','navWishlist');renderWishlist()">
+        <span style="font-size:1.2rem">❤️</span>
+        <div style="flex:1"><div style="font-weight:800;font-size:0.88rem">Meri Wishlist</div><div style="font-size:0.7rem;color:#888" id="wlCount">0 items saved</div></div>
+        <span style="color:#aaa">›</span>
+      </div>
+      <div style="padding:14px 16px;border-bottom:1px solid #f5f5f5;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="showPage('pageCoupons','navCoupons');initCoupons()">
+        <span style="font-size:1.2rem">🏷️</span>
+        <div style="flex:1"><div style="font-weight:800;font-size:0.88rem">Coupon Codes</div><div style="font-size:0.7rem;color:#888">Discounts & Offers</div></div>
+        <span style="color:#aaa">›</span>
+      </div>
+      <div style="padding:14px 16px;display:flex;align-items:center;gap:12px">
+        <span style="font-size:1.2rem">📍</span>
+        <div style="flex:1"><div style="font-weight:800;font-size:0.88rem">Location</div><div style="font-size:0.7rem;color:#888">Delhi NCR</div></div>
+        <span style="color:#aaa">›</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <div class="ni active" id="navHome" onclick="showPage('pageHome','navHome')">
+    <div class="ic">🏠</div><div class="lb" style="color:#F8C51B">Home</div>
+  </div>
+  <div class="ni" id="navCoupons" onclick="showPage('pageCoupons','navCoupons');initCoupons()">
+    <div class="ic">🏷️</div><div class="lb">Coupons</div>
+  </div>
+  <div class="ni" id="navWishlist" onclick="showPage('pageWishlist','navWishlist');renderWishlist()">
+    <div class="ic">❤️</div><div class="lb">Wishlist</div>
+  </div>
+  <div class="ni" id="navProfile" onclick="showPage('pageProfile','navProfile')">
+    <div class="ic">👤</div><div class="lb">Profile</div>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+  <div class="modal"><div class="mhandle"></div><div id="modalBody"></div></div>
+</div>
+
+<!-- AD OVERLAY -->
+<div class="ad-ov" id="adOv">
+  <div class="ad-box">
+    <div class="ad-hdr">
+      <div class="ad-hdr-txt" id="adHdrTxt">🔒 Coupon Unlock Ho Raha Hai...</div>
+      <button class="ad-x" onclick="closeAdOv()">✕</button>
+    </div>
+    <div class="ad-body" id="adBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+// ================================================================
+// CONFIG
+// ================================================================
+const GITHUB_JSON_URL = "https://raw.githubusercontent.com/aryanyadav12125-ctrl/bestprice/main/grocery_data.json";
+const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
+
+const PLT = {
+  blinkit:   {name:'Blinkit',   color:'#F8C51B', tc:'#1C1C1C', time:'10 mins'},
+  instamart: {name:'Instamart', color:'#FC5A03', tc:'white',   time:'15 mins'},
+  zepto:     {name:'Zepto',     color:'#8B2FC9', tc:'white',   time:'10 mins'},
+  amazon:    {name:'Amazon',    color:'#FF9900', tc:'white',   time:'1-2 days'},
+  bigbasket: {name:'BigBasket', color:'#84cc16', tc:'white',   time:'30 mins'},
+};
+
+const BRANDS = [
+  {id:'all',     name:'All',      color:'#1C1C1C', emoji:'🛒'},
+  {id:'dominos', name:'Dominos',  color:'#006491', emoji:'🍕'},
+  {id:'swiggy',  name:'Swiggy',   color:'#FC8019', emoji:'🧡'},
+  {id:'blinkit', name:'Blinkit',  color:'#F8C51B', emoji:'⚡'},
+  {id:'zepto',   name:'Zepto',    color:'#8B2FC9', emoji:'💜'},
+  {id:'zomato',  name:'Zomato',   color:'#E23744', emoji:'🍽'},
+  {id:'amazon',  name:'Amazon',   color:'#FF9900', emoji:'📦'},
+];
+
+const COUPON_VERSION = 'v1';
+const COUPONS = [
+  {id:1,  brand:'dominos', discount:'50% OFF',  desc:'2nd pizza free! Min order Rs.300',        code:'DOMINOS50', exp:'30 Jun',  tags:['hot'], emoji:'🍕', available:true},
+  {id:2,  brand:'dominos', discount:'Rs.100 OFF',desc:'First order Rs.100 off',                 code:'NEWDOM100', exp:'31 Dec',  tags:['new'], emoji:'🎁', available:true},
+  {id:3,  brand:'dominos', discount:'30% OFF',  desc:'Weekend special offer',                   code:'WEEKEND30', exp:'Ongoing', tags:['hot'], emoji:'🎉', available:false},
+  {id:4,  brand:'swiggy',  discount:'60% OFF',  desc:'First order — 60% off up to Rs.120',      code:'SWIGGY60',  exp:'15 Jul',  tags:['new'], emoji:'🧡', available:true},
+  {id:5,  brand:'swiggy',  discount:'Rs.75 OFF',desc:'Instamart Rs.499+ order gets Rs.75 off',  code:'INSTA75',   exp:'30 Jun',  tags:['hot'], emoji:'🛒', available:true},
+  {id:6,  brand:'swiggy',  discount:'40% OFF',  desc:'Swiggy One members special',              code:'SWGONE40',  exp:'31 Aug',  tags:[],      emoji:'⭐', available:false},
+  {id:7,  brand:'blinkit', discount:'Rs.50 OFF',desc:'Rs.299+ grocery order gets Rs.50 off',    code:'BLINK50',   exp:'20 Jun',  tags:['hot'], emoji:'⚡', available:true},
+  {id:8,  brand:'blinkit', discount:'20% OFF',  desc:'Fresh fruits and vegetables 20% off',     code:'FRESH20',   exp:'30 Jun',  tags:[],      emoji:'🥦', available:false},
+  {id:9,  brand:'zepto',   discount:'Rs.80 OFF',desc:'First order Rs.80 instant cashback',      code:'ZEPTO80',   exp:'31 Jul',  tags:['new'], emoji:'💜', available:true},
+  {id:10, brand:'zepto',   discount:'15% OFF',  desc:'Daily essentials 15% off',                code:'ZSAVE15',   exp:'Ongoing', tags:[],      emoji:'🎁', available:false},
+  {id:11, brand:'zomato',  discount:'Rs.125 OFF',desc:'Gold members restaurant orders',         code:'GOLD125',   exp:'30 Jun',  tags:['hot'], emoji:'🏆', available:true},
+  {id:12, brand:'zomato',  discount:'50% OFF',  desc:'Late night 11PM-2AM flat 50% off',        code:'LATENIGHT', exp:'Ongoing', tags:[],      emoji:'🌙', available:false},
+  {id:13, brand:'amazon',  discount:'10% OFF',  desc:'Amazon Fresh SBI card 10% extra',         code:'SBIAMZN',   exp:'30 Jun',  tags:[],      emoji:'📦', available:true},
+  {id:14, brand:'amazon',  discount:'Rs.200 OFF',desc:'Rs.1000+ order for Prime members',       code:'PRIME200',  exp:'31 Jul',  tags:['new'], emoji:'⭐', available:true},
+];
+
+// ================================================================
+// STATE
+// ================================================================
+let PRODUCTS = [];
+let wishlist = [];
+let revealedCoupons = {};
+let currentBrand = 'all';
+let adTimerRef = null;
+let pendingCouponId = null;
+let dataLoaded = false;
+
+// ================================================================
+// LIVE DATA LOADER
+// ================================================================
+async function loadLiveData() {
+  try {
+    const cached = localStorage.getItem('bp_data');
+    const cacheTime = parseInt(localStorage.getItem('bp_data_ts') || '0');
+    if (cached && (Date.now() - cacheTime) < CACHE_TTL_MS) {
+      PRODUCTS = JSON.parse(cached);
+      dataLoaded = true;
+      console.log('Loaded from cache:', PRODUCTS.length, 'products');
+      return true;
+    }
+  } catch(e) {}
+
+  try {
+    showDataLoading();
+    const resp = await fetch(GITHUB_JSON_URL + '?t=' + Date.now());
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const json = await resp.json();
+    const raw = json.products || json;
+
+    PRODUCTS = raw.map(function(p, idx) {
+      return {
+        id:     p.id || idx + 1,
+        cat:    p.cat || ['all'],
+        emoji:  p.emoji || '🛒',
+        brand:  p.brand || (p.keyword ? p.keyword.split(' ')[0] : 'Brand'),
+        name:   p.name || p.keyword || 'Product',
+        prices: (p.prices || []).map(function(pr) {
+          return {
+            p:     pr.p,
+            orig:  pr.orig || null,
+            price: pr.price,
+            size:  pr.size || pr.unit || '',
+            link:  pr.link || '#',
+            time:  pr.time || pr.delivery || '',
+          };
+        }),
+      };
+    });
+
+    try {
+      localStorage.setItem('bp_data', JSON.stringify(PRODUCTS));
+      localStorage.setItem('bp_data_ts', String(Date.now()));
+      if (json.generated_at) {
+        localStorage.setItem('bp_last_updated', json.generated_at);
+      }
+    } catch(e) {}
+
+    dataLoaded = true;
+    console.log('Live data loaded:', PRODUCTS.length, 'products');
+
+    if (json.generated_at) {
+      var ago = getTimeAgo(new Date(json.generated_at));
+      showToast('Prices updated ' + ago);
+    }
+    return true;
+
+  } catch(err) {
+    console.warn('GitHub fetch failed:', err);
+    showDataError();
+    return false;
+  }
+}
+
+function showDataLoading() {
+  var el = document.getElementById('productGrid');
+  if (el) {
+    el.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:50px 20px">'
+      + '<div class="spin" style="margin:0 auto 14px"></div>'
+      + '<div style="font-size:0.88rem;font-weight:800;color:#1C1C1C">Loading live prices...</div>'
+      + '<div style="font-size:0.72rem;color:#aaa;margin-top:4px">Fetching from GitHub</div>'
+      + '</div>';
+  }
+}
+
+function showDataError() {
+  var el = document.getElementById('productGrid');
+  if (el) {
+    el.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 16px">'
+      + '<div style="font-size:2.5rem;margin-bottom:10px">😕</div>'
+      + '<div style="font-size:0.88rem;font-weight:800;color:#1C1C1C">Failed to load data</div>'
+      + '<div style="font-size:0.72rem;color:#888;margin-top:6px;line-height:1.4">Check your GitHub JSON URL.<br>Network may be slow.</div>'
+      + '<button onclick="retryLoad()" style="margin-top:14px;background:#F8C51B;border:none;border-radius:10px;padding:10px 20px;font-weight:900;font-family:inherit;cursor:pointer;font-size:0.82rem">Try Again</button>'
+      + '</div>';
+  }
+}
+
+async function retryLoad() {
+  try {
+    localStorage.removeItem('bp_data');
+    localStorage.removeItem('bp_data_ts');
+  } catch(e) {}
+  var ok = await loadLiveData();
+  if (ok && PRODUCTS.length > 0) {
+    renderGrid(PRODUCTS.filter(function(p){ return p.cat.includes('all'); }));
+  }
+}
+
+function getTimeAgo(date) {
+  var mins = Math.floor((Date.now() - date.getTime()) / 60000);
+  if (mins < 1)  return 'just now';
+  if (mins < 60) return mins + ' min ago';
+  var hrs = Math.floor(mins / 60);
+  if (hrs < 24)  return hrs + ' hrs ago';
+  return Math.floor(hrs / 24) + ' days ago';
+}
+
+// ================================================================
+// SEARCH
+// ================================================================
+function searchItem(q) {
+  document.getElementById('searchInput').value = q;
+  doSearch();
+}
+
+function doSearch() {
+  var q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if (!q) return;
+  showPage('pageSearch', 'navSearch');
+  showLoading('searchGrid');
+  setTimeout(function() {
+    var res = PRODUCTS.filter(function(p) {
+      return p.name.toLowerCase().includes(q)
+          || p.brand.toLowerCase().includes(q)
+          || p.cat.some(function(c){ return c.includes(q); });
+    });
+    renderGrid(res, 'searchGrid');
+  }, 400);
+}
+
+// ================================================================
+// VERSION & COUPON STATE
+// ================================================================
+function checkVersion() {
+  var saved = localStorage.getItem('bp_version');
+  if (saved !== COUPON_VERSION) {
+    revealedCoupons = {};
+    localStorage.setItem('bp_version', COUPON_VERSION);
+    localStorage.removeItem('bp_revealed');
+  } else {
+    try { revealedCoupons = JSON.parse(localStorage.getItem('bp_revealed') || '{}'); }
+    catch(e) { revealedCoupons = {}; }
+  }
+}
+
+function saveRevealed() {
+  localStorage.setItem('bp_revealed', JSON.stringify(revealedCoupons));
+}
+
+// ================================================================
+// COUPONS
+// ================================================================
+function initCoupons() {
+  checkVersion();
+  renderBrands();
+  filterCoupons(currentBrand);
+  updateNewCouponBanner();
+}
+
+function updateNewCouponBanner() {
+  var filtered = currentBrand === 'all' ? COUPONS : COUPONS.filter(function(c){ return c.brand === currentBrand; });
+  var unrevealed = filtered.filter(function(c){ return revealedCoupons[c.id] === undefined; });
+  var sub = document.getElementById('newCouponSub');
+  if (!sub) return;
+  if (unrevealed.length > 0) {
+    sub.textContent = unrevealed.length + ' new coupons available — grab them now!';
+    sub.style.color = '#F8C51B';
+  } else {
+    sub.textContent = 'All coupons checked — come back later!';
+    sub.style.color = 'rgba(255,255,255,0.5)';
+  }
+}
+
+function renderBrands() {
+  var el = document.getElementById('brandScroll');
+  if (!el) return;
+  el.innerHTML = BRANDS.map(function(b) {
+    return '<div class="brand-chip ' + (b.id === currentBrand ? 'active' : '') + '" id="bc_' + b.id + '" onclick="filterCoupons(\'' + b.id + '\')">'
+      + '<div class="brand-logo-box" style="background:' + b.color + '">' + b.emoji + '</div>'
+      + '<div class="brand-nm">' + b.name + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function filterCoupons(brandId) {
+  currentBrand = brandId;
+  document.querySelectorAll('.brand-chip').forEach(function(c){ c.classList.remove('active'); });
+  var bc = document.getElementById('bc_' + brandId);
+  if (bc) bc.classList.add('active');
+  updateNewCouponBanner();
+
+  var filtered = brandId === 'all' ? COUPONS : COUPONS.filter(function(c){ return c.brand === brandId; });
+  var list = document.getElementById('couponList');
+  if (!list) return;
+
+  if (!filtered.length) {
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:#aaa"><div style="font-size:2.5rem">😕</div><div style="font-weight:800;margin-top:8px">No coupons found</div></div>';
+    return;
+  }
+  list.innerHTML = filtered.map(function(c){ return renderCouponCard(c); }).join('');
+}
+
+function renderCouponCard(c) {
+  var brand = BRANDS.find(function(b){ return b.id === c.brand; });
+  var revealed = revealedCoupons[c.id];
+
+  var tags = c.tags.map(function(t) {
+    var cls = t === 'hot' ? 'hot' : t === 'new' ? 'new' : 'normal';
+    var label = t === 'hot' ? '🔥 Hot' : t === 'new' ? '✨ New' : '#' + t;
+    return '<span class="ctag ' + cls + '">' + label + '</span>';
+  }).join('');
+
+  var codeSection, btnSection;
+  if (revealed === true) {
+    codeSection = '<div class="code-revealed" onclick="copyCode(\'' + c.code + '\')" title="Tap to copy">' + c.code + ' 📋</div>';
+    btnSection  = '<button class="copy-small-btn" onclick="copyCode(\'' + c.code + '\')">📋 Copy</button>';
+  } else if (revealed === false) {
+    codeSection = '<div class="code-unavail">❌ Not Available</div>';
+    btnSection  = '<button class="unavail-btn" disabled>😔 Not Found</button>';
+  } else {
+    codeSection = '<div class="code-hidden">• • • • • • • •</div>';
+    btnSection  = '<button class="get-new-btn" onclick="startGetCoupon(' + c.id + ',event)">🔓 Get Code</button>';
+  }
+
+  return '<div class="coupon-card ' + (revealed === true ? 'revealed-card' : '') + '" id="ccard_' + c.id + '">'
+    + '<div class="ctop">'
+    + '<div class="c-brand-icon" style="background:' + brand.color + '20">' + c.emoji + '</div>'
+    + '<div class="c-info">'
+    + '<div class="c-discount">' + c.discount + ' — ' + brand.name + '</div>'
+    + '<div class="c-desc">' + c.desc + '</div>'
+    + '<div class="c-tags">' + tags + '</div>'
+    + '<div class="c-exp' + (c.exp.includes('Jun') ? ' expiring' : '') + '">⏰ Expires: ' + c.exp + '</div>'
+    + '</div></div>'
+    + '<div class="cbottom">'
+    + '<div id="codebox_' + c.id + '">' + codeSection + '</div>'
+    + '<div id="btnbox_' + c.id + '">' + btnSection + '</div>'
+    + '</div></div>';
+}
+
+function tryGetNewCoupon() {
+  var filtered = currentBrand === 'all' ? COUPONS : COUPONS.filter(function(c){ return c.brand === currentBrand; });
+  var unrevealed = filtered.filter(function(c){ return revealedCoupons[c.id] === undefined; });
+  if (!unrevealed.length) { showToast('All coupons checked! Come back later'); return; }
+  var pick = unrevealed[Math.floor(Math.random() * unrevealed.length)];
+  startGetCoupon(pick.id, null);
+}
+
+// ================================================================
+// AD FLOW
+// ================================================================
+function startGetCoupon(couponId, e) {
+  if (e) e.stopPropagation();
+  pendingCouponId = couponId;
+  var c = COUPONS.find(function(x){ return x.id === couponId; });
+  var brand = BRANDS.find(function(b){ return b.id === c.brand; });
+  showAdLoading(c, brand);
+}
+
+function showAdLoading(c, brand) {
+  document.getElementById('adHdrTxt').textContent = '🔒 Unlocking Your Coupon...';
+  var secs = 5;
+  document.getElementById('adBody').innerHTML = '<div class="ad-loading">'
+    + '<div class="ad-emoji-big">' + c.emoji + '</div>'
+    + '<div class="ad-title">' + c.discount + ' — ' + brand.name + '</div>'
+    + '<div class="ad-sub">' + c.desc + '</div>'
+    + '<div class="fake-ad">'
+    + '<div class="fake-ad-label">📢 Sponsored</div>'
+    + '<div class="fake-ad-content">'
+    + '<div class="fake-ad-img">🛒</div>'
+    + '<div class="fake-ad-text">'
+    + '<div class="fat1">BestPrice App</div>'
+    + '<div class="fat2">India\'s #1 price comparison</div>'
+    + '<div class="fat3">★★★★★ 4.8 Rating</div>'
+    + '</div></div>'
+    + '<div class="progress-wrap">'
+    + '<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>'
+    + '<div class="timer-txt">Coupon unlocks in <span id="adSecs">' + secs + '</span> seconds...</div>'
+    + '</div></div>'
+    + '<button class="unlock-btn" id="unlockBtn" onclick="finishAd()" disabled>⏳ Please wait...</button>'
+    + '</div>';
+
+  document.getElementById('adOv').classList.add('open');
+
+  var elapsed = 0;
+  var total = 5000;
+  adTimerRef = setInterval(function() {
+    elapsed += 100;
+    secs = Math.ceil((total - elapsed) / 1000);
+    var pct = Math.min((elapsed / total) * 100, 100);
+    var pf = document.getElementById('progressFill');
+    var as = document.getElementById('adSecs');
+    var ub = document.getElementById('unlockBtn');
+    if (pf) pf.style.width = pct + '%';
+    if (as) as.textContent = Math.max(secs, 0);
+    if (elapsed >= total) {
+      clearInterval(adTimerRef);
+      if (as && as.parentElement) as.parentElement.textContent = 'Coupon is ready!';
+      if (ub) { ub.disabled = false; ub.classList.add('ready'); ub.textContent = '🎉 Reveal Code!'; }
+    }
+  }, 100);
+}
+
+function finishAd() {
+  clearInterval(adTimerRef);
+  var c = COUPONS.find(function(x){ return x.id === pendingCouponId; });
+  var brand = BRANDS.find(function(b){ return b.id === c.brand; });
+
+  if (c.available) {
+    revealedCoupons[c.id] = true;
+    saveRevealed();
+    document.getElementById('adHdrTxt').textContent = '🎉 Coupon Unlocked!';
+    document.getElementById('adBody').innerHTML = '<div class="ad-success">'
+      + '<div class="success-icon">🎉</div>'
+      + '<div class="success-title">Coupon Unlocked!</div>'
+      + '<div class="big-code-box">'
+      + '<div class="big-code-label">' + brand.name + ' Coupon Code</div>'
+      + '<div class="big-code">' + c.code + '</div>'
+      + '<div class="big-code-save">' + c.discount + ' Off — Expires: ' + c.exp + '</div>'
+      + '</div>'
+      + '<button class="copy-big-btn" onclick="copyCode(\'' + c.code + '\')">📋 Copy Code</button>'
+      + '<button class="close-big-btn" onclick="closeAdOv()">✕ Close</button>'
+      + '</div>';
+  } else {
+    revealedCoupons[c.id] = false;
+    saveRevealed();
+    document.getElementById('adHdrTxt').textContent = '😔 Coupon Unavailable';
+    document.getElementById('adBody').innerHTML = '<div class="ad-fail">'
+      + '<div class="fail-icon">😔</div>'
+      + '<div class="fail-title">This Coupon is Currently Unavailable</div>'
+      + '<div class="fail-sub">' + brand.name + ' ' + c.discount + ' coupon is not available right now.<br>We will notify you when it is back!</div>'
+      + '<button class="notify-btn-big" onclick="closeAdOv();showToast(\'🔔 We will notify you when available!\')">🔔 Notify Me</button>'
+      + '<button class="close-fail-btn" onclick="closeAdOv()">✕ Close</button>'
+      + '</div>';
+  }
+  updateCouponCard(c.id);
+  updateNewCouponBanner();
+}
+
+function updateCouponCard(couponId) {
+  var c = COUPONS.find(function(x){ return x.id === couponId; });
+  var revealed = revealedCoupons[couponId];
+  var card    = document.getElementById('ccard_' + couponId);
+  var codebox = document.getElementById('codebox_' + couponId);
+  var btnbox  = document.getElementById('btnbox_' + couponId);
+  if (!card || !codebox || !btnbox) return;
+  if (revealed === true) {
+    codebox.innerHTML = '<div class="code-revealed" onclick="copyCode(\'' + c.code + '\')">' + c.code + ' 📋</div>';
+    btnbox.innerHTML  = '<button class="copy-small-btn" onclick="copyCode(\'' + c.code + '\')">📋 Copy</button>';
+    card.classList.add('revealed-card');
+  } else if (revealed === false) {
+    codebox.innerHTML = '<div class="code-unavail">❌ Not Available</div>';
+    btnbox.innerHTML  = '<button class="unavail-btn" disabled>😔 Not Found</button>';
+  }
+}
+
+function closeAdOv() {
+  clearInterval(adTimerRef);
+  document.getElementById('adOv').classList.remove('open');
+  pendingCouponId = null;
+}
+
+function copyCode(code) {
+  navigator.clipboard.writeText(code).catch(function(){});
+  showToast('✅ ' + code + ' copied!');
+  closeAdOv();
+}
+
+// ================================================================
+// PRODUCTS GRID
+// ================================================================
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+
+function toggleWishlist(id, e) {
+  e.stopPropagation();
+  var idx = wishlist.indexOf(id);
+  if (idx === -1) { wishlist.push(id); showToast('❤️ Added to Wishlist!'); }
+  else { wishlist.splice(idx, 1); showToast('💔 Removed from Wishlist'); }
+  document.querySelectorAll('.wbadge[data-id="' + id + '"]').forEach(function(el) {
+    el.textContent = wishlist.includes(id) ? '❤️' : '🤍';
+    el.classList.toggle('wishlisted', wishlist.includes(id));
+  });
+  document.getElementById('wlCount').textContent = wishlist.length + ' items saved';
+  renderWishlist();
+}
+
+function renderCard(p) {
+  var sorted = p.prices.slice().sort(function(a,b){ return a.price - b.price; });
+  var savings = sorted.length > 1 ? sorted[sorted.length-1].price - sorted[0].price : 0;
+  var isWL = wishlist.includes(p.id);
+
+  var rows = sorted.slice(0, 2).map(function(pr, i) {
+    var plt = PLT[pr.p] || {name: pr.p, color:'#888', tc:'white', time:''};
+    var isBest = i === 0;
+    return '<div class="prow ' + (isBest ? 'cheap' : '') + '">'
+      + '<div style="display:flex;align-items:center">'
+      + '<div class="plogo" style="background:' + plt.color + ';color:' + plt.tc + '">' + plt.name.substring(0,7) + '</div>'
+      + (pr.size ? '<span class="psz">' + pr.size + '</span>' : '')
+      + '</div>'
+      + '<div style="text-align:right">'
+      + (pr.orig ? '<div class="ppr orig">Rs.' + pr.orig + '</div>' : '')
+      + '<div class="ppr ' + (isBest ? 'best' : '') + '">Rs.' + pr.price + '</div>'
+      + '<div class="ptm">⏱ ' + plt.time + '</div>'
+      + '</div></div>';
+  }).join('');
+
+  return '<div class="pcard" onclick="openModal(' + p.id + ')">'
+    + '<div class="pimg">'
+    + '<div class="pemoji">' + p.emoji + '</div>'
+    + '<div class="wbadge ' + (isWL ? 'wishlisted' : '') + '" data-id="' + p.id + '" onclick="toggleWishlist(' + p.id + ',event)">' + (isWL ? '❤️' : '🤍') + '</div>'
+    + '<div class="cbadge">Compare</div>'
+    + '</div>'
+    + '<div class="pinfo">'
+    + '<div class="pbrand">' + p.brand + '</div>'
+    + '<div class="pname">' + p.name + '</div>'
+    + rows
+    + (savings > 0 ? '<div class="spill">💰 Save Rs.' + Math.round(savings) + '!</div>' : '')
+    + '</div></div>';
+}
+
+function renderWishlist() {
+  var el = document.getElementById('wishlistContent');
+  if (!el) return;
+  if (!wishlist.length) {
+    el.innerHTML = '<div class="wl-empty"><div class="big">🤍</div><p style="font-weight:800">Your Wishlist is Empty!</p><small>Tap 🤍 on any product to save it</small></div>';
+    return;
+  }
+  el.innerHTML = '<div class="wl-grid">' + PRODUCTS.filter(function(p){ return wishlist.includes(p.id); }).map(renderCard).join('') + '</div>';
+}
+
+function renderGrid(items, gridId) {
+  gridId = gridId || 'productGrid';
+  var el = document.getElementById(gridId);
+  if (!el) return;
+  if (!items.length) {
+    el.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#aaa"><div style="font-size:2.5rem">😕</div><div style="font-weight:800;margin-top:8px">No results found</div></div>';
+    return;
+  }
+  el.innerHTML = items.map(renderCard).join('');
+}
+
+function showLoading(gridId) {
+  gridId = gridId || 'productGrid';
+  var el = document.getElementById(gridId);
+  if (el) el.innerHTML = '<div class="loading" style="display:block;grid-column:1/-1"><div class="spin"></div><p style="font-size:0.8rem;color:#aaa">Comparing prices...</p></div>';
+}
+
+function loadCat(cat, el) {
+  document.querySelectorAll('.cat').forEach(function(c){ c.classList.remove('active'); });
+  el.classList.add('active');
+  if (!dataLoaded) { showToast('Loading data...'); return; }
+  showLoading();
+  setTimeout(function() {
+    renderGrid(PRODUCTS.filter(function(p){ return p.cat.includes(cat); }));
+  }, 300);
+}
+
+function openModal(id) {
+  var p = PRODUCTS.find(function(x){ return x.id === id; });
+  if (!p) return;
+  var sorted = p.prices.slice().sort(function(a,b){ return a.price - b.price; });
+  var savings = sorted.length > 1 ? sorted[sorted.length-1].price - sorted[0].price : 0;
+  var isWL = wishlist.includes(p.id);
+
+  var rows = sorted.map(function(pr, i) {
+    var plt = PLT[pr.p] || {name: pr.p, color:'#888', tc:'white', time:''};
+    var isBest = i === 0;
+    return '<div class="mrow ' + (isBest ? 'best' : '') + '">'
+      + '<div class="mrl">'
+      + '<div class="mlg" style="background:' + plt.color + ';color:' + plt.tc + '">' + plt.name + '</div>'
+      + '<div><div class="mplnm">' + plt.name + '</div><div class="mptm">⚡ ' + plt.time + (pr.size ? ' • ' + pr.size : '') + '</div></div>'
+      + '</div>'
+      + '<div class="mrr">'
+      + (pr.orig ? '<div class="morig">Rs.' + pr.orig + '</div>' : '')
+      + '<div class="mpr ' + (isBest ? 'best' : '') + '">Rs.' + pr.price + '</div>'
+      + '<a href="' + (pr.link || '#') + '" target="_blank" rel="noopener"><button class="obtn">Order Now</button></a>'
+      + '</div></div>';
+  }).join('');
+
+  document.getElementById('modalBody').innerHTML = '<div class="mhead">'
+    + '<div class="memi">' + p.emoji + '</div>'
+    + '<div><div class="mbn">' + p.brand + '</div><div class="mnm">' + p.name + '</div></div>'
+    + '<div style="margin-left:auto"><div class="wbadge ' + (isWL ? 'wishlisted' : '') + '" data-id="' + p.id + '" style="position:static" onclick="toggleWishlist(' + p.id + ',event)">' + (isWL ? '❤️' : '🤍') + '</div></div>'
+    + '</div>'
+    + (savings > 0 ? '<div class="msave"><div class="ml">💰 Order from the cheapest option</div><div class="ma">Save Rs.' + Math.round(savings) + '!</div></div>' : '')
+    + rows
+    + '<button class="closebtn" onclick="document.getElementById(\'overlay\').classList.remove(\'open\')">✕ Close</button>';
+
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeOverlay(e) {
+  if (e.target === document.getElementById('overlay')) {
+    document.getElementById('overlay').classList.remove('open');
+  }
+}
+
+function showPage(pageId, navId) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById(pageId).classList.add('active');
+  document.querySelectorAll('.ni').forEach(function(n) {
+    n.classList.remove('active');
+    n.querySelector('.lb').style.color = '#aaa';
+  });
+  if (navId) {
+    var nav = document.getElementById(navId);
+    nav.classList.add('active');
+    nav.querySelector('.lb').style.color = '#F8C51B';
+  }
+}
+
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+
+// ================================================================
+// INIT
+// ================================================================
+async function init() {
+  checkVersion();
+  initCoupons();
+  showDataLoading();
+  var ok = await loadLiveData();
+  if (ok && PRODUCTS.length > 0) {
+    renderGrid(PRODUCTS.filter(function(p){ return p.cat.includes('all'); }));
+  }
+}
+
+init();
+</script>
+</body>
+</html>
