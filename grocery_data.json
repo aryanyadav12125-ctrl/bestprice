@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-14T04:28:16.447814+00:00",
+  "generated_at": "2026-06-14T14:19:38.946625+00:00",
   "total_products": 10,
   "failed_products": [],
   "products": [
@@ -15,15 +15,6 @@
       ],
       "prices": [
         {
-          "p": "amazon",
-          "price": 14.0,
-          "orig": null,
-          "size": "",
-          "link": "https://www.amazon.in/s?k=Maggi%202%20Minute%20Noodles%2070g&tag=bestpriceap01-21",
-          "time": "1-2 days",
-          "live": false
-        },
-        {
           "p": "blinkit",
           "price": 15.0,
           "orig": null,
@@ -34,7 +25,7 @@
         },
         {
           "p": "zepto",
-          "price": 17.0,
+          "price": 16.0,
           "orig": null,
           "size": "",
           "link": "https://www.zepto.com/search?query=Maggi%202%20Minute%20Noodles%2070g",
@@ -42,8 +33,17 @@
           "live": false
         },
         {
+          "p": "amazon",
+          "price": 16.0,
+          "orig": null,
+          "size": "",
+          "link": "https://www.amazon.in/s?k=Maggi%202%20Minute%20Noodles%2070g&tag=bestpriceap01-21",
+          "time": "1-2 days",
+          "live": false
+        },
+        {
           "p": "instamart",
-          "price": 19.0,
+          "price": 17.0,
           "orig": null,
           "size": "",
           "link": "https://www.swiggy.com/instamart/search?query=Maggi%202%20Minute%20Noodles%2070g",
@@ -52,7 +52,7 @@
         }
       ],
       "live_count": 0,
-      "updated_at": "2026-06-14T04:15:52.117131+00:00"
+      "updated_at": "2026-06-14T14:07:48.583258+00:00"
     },
     {
       "id": 2,
@@ -67,7 +67,7 @@
       "prices": [
         {
           "p": "zepto",
-          "price": 54.0,
+          "price": 52.0,
           "orig": null,
           "size": "",
           "link": "https://www.zepto.com/search?query=Amul%20Gold%20Full%20Cream%20Milk%20500ml",
@@ -75,17 +75,8 @@
           "live": false
         },
         {
-          "p": "amazon",
-          "price": 55.0,
-          "orig": null,
-          "size": "",
-          "link": "https://www.amazon.in/s?k=Amul%20Gold%20Full%20Cream%20Milk%20500ml&tag=bestpriceap01-21",
-          "time": "1-2 days",
-          "live": false
-        },
-        {
           "p": "blinkit",
-          "price": 56.0,
+          "price": 53.0,
           "orig": null,
           "size": "",
           "link": "https://blinkit.com/s/?q=Amul%20Gold%20Full%20Cream%20Milk%20500ml",
@@ -93,8 +84,17 @@
           "live": false
         },
         {
+          "p": "amazon",
+          "price": 53.0,
+          "orig": null,
+          "size": "",
+          "link": "https://www.amazon.in/s?k=Amul%20Gold%20Full%20Cream%20Milk%20500ml&tag=bestpriceap01-21",
+          "time": "1-2 days",
+          "live": false
+        },
+        {
           "p": "instamart",
-          "price": 57.0,
+          "price": 59.0,
           "orig": null,
           "size": "",
           "link": "https://www.swiggy.com/instamart/search?query=Amul%20Gold%20Full%20Cream%20Milk%20500ml",
@@ -103,7 +103,7 @@
         }
       ],
       "live_count": 0,
-      "updated_at": "2026-06-14T04:17:13.163888+00:00"
+      "updated_at": "2026-06-14T14:09:10.066790+00:00"
     },
     {
       "id": 3,
@@ -118,7 +118,7 @@
       "prices": [
         {
           "p": "amazon",
-          "price": 21.0,
+          "price": 20.0,
           "orig": null,
           "size": "",
           "link": "https://www.amazon.in/s?k=Lays%20Classic%20Salted%20Chips%2026g&tag=bestpriceap01-21",
@@ -126,17 +126,8 @@
           "live": false
         },
         {
-          "p": "zepto",
-          "price": 23.0,
-          "orig": null,
-          "size": "",
-          "link": "https://www.zepto.com/search?query=Lays%20Classic%20Salted%20Chips%2026g",
-          "time": "10 mins",
-          "live": false
-        },
-        {
           "p": "blinkit",
-          "price": 24.0,
+          "price": 23.0,
           "orig": null,
           "size": "",
           "link": "https://blinkit.com/s/?q=Lays%20Classic%20Salted%20Chips%2026g",
@@ -145,16 +136,25 @@
         },
         {
           "p": "instamart",
-          "price": 25.0,
+          "price": 24.0,
           "orig": null,
           "size": "",
           "link": "https://www.swiggy.com/instamart/search?query=Lays%20Classic%20Salted%20Chips%2026g",
           "time": "15 mins",
           "live": false
+        },
+        {
+          "p": "zepto",
+          "price": 24.0,
+          "orig": null,
+          "size": "",
+          "link": "https://www.zepto.com/search?query=Lays%20Classic%20Salted%20Chips%2026g",
+          "time": "10 mins",
+          "live": false
         }
       ],
       "live_count": 0,
-      "updated_at": "2026-06-14T04:18:33.998616+00:00"
+      "updated_at": "2026-06-14T14:10:32.336717+00:00"
     },
     {
       "id": 4,
@@ -169,7 +169,7 @@
       "prices": [
         {
           "p": "amazon",
-          "price": 37.0,
+          "price": 39.0,
           "orig": null,
           "size": "",
           "link": "https://www.amazon.in/s?k=Pepsi%20500ml%20Bottle&tag=bestpriceap01-21",
@@ -178,7 +178,7 @@
         },
         {
           "p": "zepto",
-          "price": 40.0,
+          "price": 42.0,
           "orig": null,
           "size": "",
           "link": "https://www.zepto.com/search?query=Pepsi%20500ml%20Bottle",
@@ -187,7 +187,7 @@
         },
         {
           "p": "blinkit",
-          "price": 43.0,
+          "price": 44.0,
           "orig": null,
           "size": "",
           "link": "https://blinkit.com/s/?q=Pepsi%20500ml%20Bottle",
@@ -196,7 +196,7 @@
         },
         {
           "p": "instamart",
-          "price": 43.0,
+          "price": 44.0,
           "orig": null,
           "size": "",
           "link": "https://www.swiggy.com/instamart/search?query=Pepsi%20500ml%20Bottle",
@@ -205,7 +205,7 @@
         }
       ],
       "live_count": 0,
-      "updated_at": "2026-06-14T04:19:51.711764+00:00"
+      "updated_at": "2026-06-14T14:11:49.756601+00:00"
     },
     {
       "id": 5,
@@ -219,17 +219,8 @@
       ],
       "prices": [
         {
-          "p": "zepto",
-          "price": 318.0,
-          "orig": null,
-          "size": "",
-          "link": "https://www.zepto.com/search?query=Aashirvaad%20Chakki%20Atta%205kg",
-          "time": "10 mins",
-          "live": false
-        },
-        {
           "p": "amazon",
-          "price": 320.0,
+          "price": 314.0,
           "orig": null,
           "size": "",
           "link": "https://www.amazon.in/s?k=Aashirvaad%20Chakki%20Atta%205kg&tag=bestpriceap01-21",
@@ -238,7 +229,7 @@
         },
         {
           "p": "blinkit",
-          "price": 328.0,
+          "price": 315.0,
           "orig": null,
           "size": "",
           "link": "https://blinkit.com/s/?q=Aashirvaad%20Chakki%20Atta%205kg",
@@ -246,8 +237,17 @@
           "live": false
         },
         {
+          "p": "zepto",
+          "price": 323.0,
+          "orig": null,
+          "size": "",
+          "link": "https://www.zepto.com/search?query=Aashirvaad%20Chakki%20Atta%205kg",
+          "time": "10 mins",
+          "live": false
+        },
+        {
           "p": "instamart",
-          "price": 330.0,
+          "price": 334.0,
           "orig": null,
           "size": "",
           "link": "https://www.swiggy.com/instamart/search?query=Aashirvaad%20Chakki%20Atta%205kg",
@@ -256,7 +256,7 @@
         }
       ],
       "live_count": 0,
-      "updated_at": "2026-06-14T04:21:11.952748+00:00"
+      "updated_at": "2026-06-14T14:13:05.732146+00:00"
     },
     {
       "id": 6,
@@ -271,19 +271,10 @@
       "prices": [
         {
           "p": "zepto",
-          "price": 51.0,
-          "orig": null,
-          "size": "",
-          "link": "https://www.zepto.com/search?query=Amul%20Butter%20500g",
-          "time": "10 mins",
-          "live": false
-        },
-        {
-          "p": "blinkit",
           "price": 53.0,
           "orig": null,
           "size": "",
-          "link": "https://blinkit.com/s/?q=Amul%20Butter%20500g",
+          "link": "https://www.zepto.com/search?query=Amul%20Butter%20500g",
           "time": "10 mins",
           "live": false
         },
@@ -297,8 +288,17 @@
           "live": false
         },
         {
-          "p": "instamart",
+          "p": "blinkit",
           "price": 56.0,
+          "orig": null,
+          "size": "",
+          "link": "https://blinkit.com/s/?q=Amul%20Butter%20500g",
+          "time": "10 mins",
+          "live": false
+        },
+        {
+          "p": "instamart",
+          "price": 57.0,
           "orig": null,
           "size": "",
           "link": "https://www.swiggy.com/instamart/search?query=Amul%20Butter%20500g",
@@ -307,7 +307,7 @@
         }
       ],
       "live_count": 0,
-      "updated_at": "2026-06-14T04:22:39.133739+00:00"
+      "updated_at": "2026-06-14T14:14:22.372481+00:00"
     },
     {
       "id": 7,
@@ -322,7 +322,7 @@
       "prices": [
         {
           "p": "amazon",
-          "price": 27.0,
+          "price": 29.0,
           "orig": null,
           "size": "",
           "link": "https://www.amazon.in/s?k=Britannia%20Good%20Day%20Biscuits&tag=bestpriceap01-21",
@@ -331,10 +331,19 @@
         },
         {
           "p": "zepto",
-          "price": 30.0,
+          "price": 33.0,
           "orig": null,
           "size": "",
           "link": "https://www.zepto.com/search?query=Britannia%20Good%20Day%20Biscuits",
+          "time": "10 mins",
+          "live": false
+        },
+        {
+          "p": "blinkit",
+          "price": 34.0,
+          "orig": null,
+          "size": "",
+          "link": "https://blinkit.com/s/?q=Britannia%20Good%20Day%20Biscuits",
           "time": "10 mins",
           "live": false
         },
@@ -346,19 +355,10 @@
           "link": "https://www.swiggy.com/instamart/search?query=Britannia%20Good%20Day%20Biscuits",
           "time": "15 mins",
           "live": false
-        },
-        {
-          "p": "blinkit",
-          "price": 38.0,
-          "orig": null,
-          "size": "",
-          "link": "https://blinkit.com/s/?q=Britannia%20Good%20Day%20Biscuits",
-          "time": "10 mins",
-          "live": false
         }
       ],
       "live_count": 0,
-      "updated_at": "2026-06-14T04:23:55.424282+00:00"
+      "updated_at": "2026-06-14T14:15:38.627904+00:00"
     },
     {
       "id": 8,
@@ -372,17 +372,8 @@
       ],
       "prices": [
         {
-          "p": "amazon",
-          "price": 99.0,
-          "orig": null,
-          "size": "",
-          "link": "https://www.amazon.in/s?k=Tropicana%20Orange%20Juice%201%20ltr&tag=bestpriceap01-21",
-          "time": "1-2 days",
-          "live": false
-        },
-        {
           "p": "zepto",
-          "price": 103.0,
+          "price": 102.0,
           "orig": null,
           "size": "",
           "link": "https://www.zepto.com/search?query=Tropicana%20Orange%20Juice%201%20ltr",
@@ -399,8 +390,17 @@
           "live": false
         },
         {
+          "p": "amazon",
+          "price": 107.0,
+          "orig": null,
+          "size": "",
+          "link": "https://www.amazon.in/s?k=Tropicana%20Orange%20Juice%201%20ltr&tag=bestpriceap01-21",
+          "time": "1-2 days",
+          "live": false
+        },
+        {
           "p": "instamart",
-          "price": 112.0,
+          "price": 109.0,
           "orig": null,
           "size": "",
           "link": "https://www.swiggy.com/instamart/search?query=Tropicana%20Orange%20Juice%201%20ltr",
@@ -409,7 +409,7 @@
         }
       ],
       "live_count": 0,
-      "updated_at": "2026-06-14T04:25:19.870771+00:00"
+      "updated_at": "2026-06-14T14:16:54.600888+00:00"
     },
     {
       "id": 9,
@@ -424,20 +424,11 @@
       "prices": [
         {
           "p": "amazon",
-          "price": 27.0,
+          "price": 26.0,
           "orig": null,
           "size": "",
           "link": "https://www.amazon.in/s?k=Tata%20Salt%201kg&tag=bestpriceap01-21",
           "time": "1-2 days",
-          "live": false
-        },
-        {
-          "p": "instamart",
-          "price": 29.0,
-          "orig": null,
-          "size": "",
-          "link": "https://www.swiggy.com/instamart/search?query=Tata%20Salt%201kg",
-          "time": "15 mins",
           "live": false
         },
         {
@@ -451,21 +442,30 @@
         },
         {
           "p": "zepto",
-          "price": 31.0,
+          "price": 30.0,
           "orig": null,
           "size": "",
           "link": "https://www.zepto.com/search?query=Tata%20Salt%201kg",
           "time": "10 mins",
           "live": false
+        },
+        {
+          "p": "instamart",
+          "price": 31.0,
+          "orig": null,
+          "size": "",
+          "link": "https://www.swiggy.com/instamart/search?query=Tata%20Salt%201kg",
+          "time": "15 mins",
+          "live": false
         }
       ],
       "live_count": 0,
-      "updated_at": "2026-06-14T04:26:50.222275+00:00"
+      "updated_at": "2026-06-14T14:18:13.988107+00:00"
     },
     {
       "id": 10,
       "keyword": "Surf Excel Easy Wash 1kg",
-      "name": "Surf Excel Easy Wash 1kg",
+      "name": "Surf Excel",
       "brand": "Surf",
       "emoji": "🧺",
       "cat": [
@@ -475,25 +475,16 @@
       "prices": [
         {
           "p": "amazon",
-          "price": 181.0,
-          "orig": null,
+          "price": 72.0,
+          "orig": 144144.0,
           "size": "",
-          "link": "https://www.amazon.in/s?k=Surf%20Excel%20Easy%20Wash%201kg&tag=bestpriceap01-21",
+          "link": "https://www.amazon.in/Surf-Excel-Detergent-Powder-Easy/dp/B01ITJ6642/ref=mp_s_a_1_3_in_f3_0o_fs_mod_primary_alm?tag=bestpriceap01-21",
           "time": "1-2 days",
-          "live": false
-        },
-        {
-          "p": "zepto",
-          "price": 184.0,
-          "orig": null,
-          "size": "",
-          "link": "https://www.zepto.com/search?query=Surf%20Excel%20Easy%20Wash%201kg",
-          "time": "10 mins",
-          "live": false
+          "live": true
         },
         {
           "p": "blinkit",
-          "price": 187.0,
+          "price": 192.0,
           "orig": null,
           "size": "",
           "link": "https://blinkit.com/s/?q=Surf%20Excel%20Easy%20Wash%201kg",
@@ -502,16 +493,43 @@
         },
         {
           "p": "instamart",
-          "price": 199.0,
+          "price": 195.0,
           "orig": null,
           "size": "",
-          "link": "https://www.swiggy.com/instamart/search?query=Surf%20Excel%20Easy%20Wash%201kg",
-          "time": "15 mins",
+          "link": "https://www.amazon.in/s?k=Surf%20Excel%20Easy%20Wash%201kg&tag=bestpriceap01-21",
+          "time": "10 mins",
           "live": false
+        },
+        {
+          "p": "zepto",
+          "price": 197.0,
+          "orig": null,
+          "size": "",
+          "link": "https://www.amazon.in/s?k=Surf%20Excel%20Easy%20Wash%201kg&tag=bestpriceap01-21",
+          "time": "10 mins",
+          "live": false
+        },
+        {
+          "p": "amazon",
+          "price": 230.0,
+          "orig": null,
+          "size": "",
+          "link": "https://www.amazon.in/Surf-Excel-Easy-Detergent-Powder/dp/B00TS89BSW/ref=mp_s_a_1_1?tag=bestpriceap01-21",
+          "time": "1-2 days",
+          "live": true
+        },
+        {
+          "p": "amazon",
+          "price": 759.0,
+          "orig": null,
+          "size": "",
+          "link": "https://www.amazon.in/Surf-Excel-Detergent-Superfine-Dissolves/dp/B0D7GQNL6B/ref=mp_s_a_1_2_in_f3_0o_fs?tag=bestpriceap01-21",
+          "time": "1-2 days",
+          "live": true
         }
       ],
-      "live_count": 0,
-      "updated_at": "2026-06-14T04:28:16.287617+00:00"
+      "live_count": 3,
+      "updated_at": "2026-06-14T14:19:38.793827+00:00"
     }
   ]
 }
